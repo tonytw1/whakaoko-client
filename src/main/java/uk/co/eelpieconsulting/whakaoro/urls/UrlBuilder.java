@@ -1,7 +1,6 @@
 package uk.co.eelpieconsulting.whakaoro.urls;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.net.URLEncoder;
 
 public class UrlBuilder {
@@ -10,6 +9,10 @@ public class UrlBuilder {
 
 	public UrlBuilder(String apiUrl) {
 		this.apiUrl = apiUrl;
+	}
+	
+	public String getUsers() {
+		return apiUrl + "/users";
 	}
 	
 	public String getChannels(String username) {

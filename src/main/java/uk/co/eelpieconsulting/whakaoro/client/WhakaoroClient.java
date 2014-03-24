@@ -59,6 +59,16 @@ public class WhakaoroClient {
 		return channelsParser.parseFeedItems(httpFetcher.get(urlBuilder.getSubscriptionItems(username, subscriptionId)));
 	}
 	
+	public void createUser(String username) throws HttpNotFoundException, HttpBadRequestException, HttpForbiddenException, HttpFetchException {
+		final HttpPost post = new HttpPost(urlBuilder.getUsers());
+		
+		final List<NameValuePair> nameValuePairs = Lists.newArrayList();		
+		nameValuePairs.add(new BasicNameValuePair("username", username));
+		
+		httpFetcher.post(post);
+		return;
+	}
+		
 	public Channel createChannel(String username, String channelId) throws UnsupportedEncodingException, HttpNotFoundException, HttpBadRequestException, HttpForbiddenException, ParsingException, HttpFetchException {
 		HttpPost post = new HttpPost(urlBuilder.getChannels(username));
 				
@@ -109,5 +119,5 @@ public class WhakaoroClient {
 			
 		return channelsParser.parseSubscription(httpFetcher.post(post));
 	}
-
+	
 }

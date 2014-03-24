@@ -17,12 +17,18 @@ public class WhakaoroClientIT {
 	
 	@Before
 	public void setup() {
-		this.client = new WhakaoroClient("http://whakaoko.eelpieconsulting.co.uk");
+		this.client = new WhakaoroClient("http://int.local:8080/whakaoko-0.0.1-SNAPSHOT");
+	}
+	
+	@Test
+	public void canCreateUser() throws Exception {
+		client.createUser("tonytw1");
 	}
 
 	@Test
 	public void canFetchListOfChannels() throws Exception {	
 		List<Channel> channels = client.getChannels("tonytw1");
+		assertFalse(channels.isEmpty());
 		for (Channel channel : channels) {
 			System.out.println(channel);
 		}
@@ -31,6 +37,8 @@ public class WhakaoroClientIT {
 	@Test
 	public void canFetchListOfChannelsSubscriptions() throws Exception {
 		List<Subscription> channelSubscriptions = client.getChannelSubscriptions("tonytw1", client.getChannels("tonytw1").get(0).getId());
+		
+		assertFalse(channelSubscriptions.isEmpty());
 		for (Subscription subscription : channelSubscriptions) {
 			System.out.println(subscription);
 		}
@@ -39,6 +47,8 @@ public class WhakaoroClientIT {
 	@Test
 	public void canFetchChannelFeedItems() throws Exception {
 		List<FeedItem> feedItems = client.getChannelFeedItems("tonytw1", client.getChannels("tonytw1").get(0).getId());
+		
+		assertFalse(feedItems.isEmpty());
 		for (FeedItem feedItem : feedItems) {
 			System.out.println(feedItem);
 		}
@@ -50,7 +60,8 @@ public class WhakaoroClientIT {
 		final Subscription subscription = client.getChannelSubscriptions("tonytw1", channelId).get(0);
 		
 		List<FeedItem> feedItems = client.getSubscriptionFeedItems("tonytw1", subscription.getId());
-		
+
+		assertFalse(feedItems.isEmpty());
 		for (FeedItem feedItem : feedItems) {
 			System.out.println(feedItem);
 		}
@@ -68,10 +79,9 @@ public class WhakaoroClientIT {
 	
 	@Test
 	public void canCreateChannel() throws Exception {
-		Channel createdChannel = client.createChannel("tonytw1", "tal");
+		Channel createdChannel = client.createChannel("tonytw1", "wellynews");
 		System.out.println(createdChannel);
-	}	
-	
+	}
 	
 	@Test
 	public void canCreateFeedSubscription() throws Exception {
