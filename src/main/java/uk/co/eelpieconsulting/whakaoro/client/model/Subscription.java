@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Subscription {
 	
-	private String id, name, channelId;
+	private String id, name, channelId, url;
 	private Date lastRead, latestItemDate;
 	
 	public String getId() {
@@ -19,6 +19,8 @@ public class Subscription {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getUrl() { return url; }
+	public void setUrl(String url) { this.url = url; }
 	public String getChannelId() {
 		return channelId;
 	}
